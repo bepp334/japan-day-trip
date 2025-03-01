@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京発・乳頭温泉＆青森 日帰り旅行しおり</title>
+    <style>
+        :root {
+            --primary: #1a6ea0;
+            --secondary: #f8b400;
+            --accent: #e84855;
+            --light: #f5f5f5;
+            --dark: #333333;
+            --onsen: #e76f51;
+            --train: #2a9d8f;
+            --food: #e9c46a;
+            --tourism: #457b9d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: #f0f5f9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/1200/400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .trip-summary {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .summary-item {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .summary-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .itinerary {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 120px;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 1rem 2rem 1rem 150px;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 100%;
+            background-color: white;
+            border: 4px solid var(--primary);
+            top: 22px;
+            border-radius: 50%;
+            z-index: 1;
+            left: 112px;
+        }
+        
+        .timeline-time {
+            position: absolute;
+            width: 100px;
+            text-align: right;
+            left: 0;
+            top: 19px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .location-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .location-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .location-info {
+            padding: 1.5rem;
+        }
+        
+        .location-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .badge-onsen {
+            background-color: var(--onsen);
+        }
+        
+        .badge-train {
+            background-color: var(--train);
+        }
+        
+        .badge-food {
+            background-color: var(--food);
+            color: var(--dark);
+        }
+        
+        .badge-tourism {
+            background-color: var(--tourism);
+        }
+        
+        .tips {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tips-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .tips-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips-list li:before {
+            content: "✓";
+            margin-right: 10px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 60px;
+            }
+            
+            .timeline-item {
+                padding-left: 90px;
+            }
+            
+            .timeline-item::after {
+                left: 52px;
+            }
+            
+            .timeline-time {
+                width: 50px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>東京発・乳頭温泉＆青森 日帰り旅行しおり</h1>
+            <p>JR東日本「旅せよ平日！たびキュン♥早割パス」利用モデルコース</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="trip-summary">
+            <h2>旅行概要</h2>
+            <p>2025年3月7日（金）に、JR東日本の「旅せよ平日！たびキュン♥早割パス」（平日限定1日乗り放題パス）を利用し、東京（目黒駅出発）から秋田県の乳頭温泉郷と青森県を巡り、当日中に東京へ終電までに戻るプランです。朝早く出発し、夜は最終の新幹線で東京に戻ります。</p>
+            
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <h3>日程</h3>
+                    <p>2025年3月7日（金）</p>
+                    <p>日帰り</p>
+                </div>
+                <div class="summary-item">
+                    <h3>移動手段</h3>
+                    <p>JR東日本たびキュン♥早割パス利用</p>
+                    <p>（新幹線・特急含む乗り放題）</p>
+                </div>
+                <div class="summary-item">
+                    <h3>主な訪問地</h3>
+                    <p>乳頭温泉郷（秋田県）</p>
+                    <p>青森市内（青森県）</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="itinerary">
+            <h2>旅程タイムテーブル</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item" style="border-left: 5px solid var(--primary);">
+                    <div class="timeline-time">6:00頃</div>
+                    <h3>東京出発</h3>
+                    <p>目黒駅からJR山手線で東京駅へ移動（所要約20分）。朝早めに出発し、長旅に備えて駅で飲み物や軽食、必要ならタオル等も用意しておきます。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">6:32</div>
+                    <h3>東京駅発</h3>
+                    <p>東京駅から秋田新幹線「こまち」号（秋田行き）に乗車。乗車時間は約2時間49分で乗換なし。たびキュンパスを利用して、この区間は指定席を事前予約しておくと安心です（1日用パスでは指定席2回まで無料）。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">9:21</div>
+                    <h3>田沢湖駅着</h3>
+                    <p>秋田新幹線「こまち」で田沢湖駅に到着。ここから路線バスに乗り換えて乳頭温泉郷を目指します。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">9:30頃</div>
+                    <h3>田沢湖駅発</h3>
+                    <p>田沢湖駅前バス乗り場から羽後交通「乳頭温泉線」路線バスに乗車し、乳頭温泉郷へ向かいます。バスは概ね1時間に1本運行しており、所要約50分、運賃は片道約820円です。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--onsen);">
+                    <div class="timeline-time">10:15頃</div>
+                    <h3>乳頭温泉郷着</h3>
+                    <p>バスは乳頭温泉郷の各宿近くに停車し、今回は例えば「妙乃湯温泉前」バス停で下車します（乳頭温泉郷の中心エリアに到着）。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--onsen);">
+                    <div class="timeline-time">10:15～13:00</div>
+                    <h3>乳頭温泉郷滞在</h3>
+                    <p>日帰り入浴と昼食を楽しむ時間です。約2～3時間滞在し、午後早めのバスで田沢湖駅に戻ります。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">13:00台</div>
+                    <h3>乳頭温泉郷発</h3>
+                    <p>午後1時頃発の路線バスで乳頭温泉郷を出発し、再び田沢湖駅へ（所要約50分）。帰りのバス車内では、温泉で温まった体を冷やさないよう注意しつつ、次の移動に備えます。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">13:50頃</div>
+                    <h3>田沢湖駅着</h3>
+                    <p>田沢湖駅に到着し、新幹線に乗り換えます。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">14:08</div>
+                    <h3>田沢湖駅発</h3>
+                    <p>田沢湖駅から秋田新幹線（こまち号）で盛岡駅へ移動（所要約29分）。この区間は自由席でも構いませんが、混雑が心配な場合は指定席を予約します。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">14:37</div>
+                    <h3>盛岡駅着</h3>
+                    <p>盛岡駅に到着。ここから東北新幹線の八戸・新青森方面行きに乗り継ぎます。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">14:50</div>
+                    <h3>盛岡駅発</h3>
+                    <p>盛岡駅で東北新幹線「はやぶさ」号に乗り換え、終点の新青森駅まで約1時間の高速移動。たびキュンパスの指定席利用可能枠が残っていれば、この盛岡→新青森も指定席を確保すると良いでしょう。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">15:52</div>
+                    <h3>新青森駅着</h3>
+                    <p>新青森駅に到着。ここから青森市中心部へ向かいます。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">16:05頃</div>
+                    <h3>新青森駅発</h3>
+                    <p>新青森駅で在来線（奥羽本線）またはタクシー等に乗り換え、青森市中心部の青森駅へ向かいます（在来線なら1駅・約5分）。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--tourism);">
+                    <div class="timeline-time">16:15頃</div>
+                    <h3>青森駅着</h3>
+                    <p>16時過ぎには青森駅周辺に到着し、夕方の観光を開始します。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--tourism);">
+                    <div class="timeline-time">16:30～19:00</div>
+                    <h3>青森市内観光</h3>
+                    <p>青森駅周辺の観光スポット巡りと夕食。夕方の限られた時間で青森の名所と郷土料理を楽しみます。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">19:30</div>
+                    <h3>新青森駅着</h3>
+                    <p>青森観光後、青森駅から新青森駅に戻ります。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--train);">
+                    <div class="timeline-time">19:44</div>
+                    <h3>新青森駅発（東京行き最終）</h3>
+                    <p>19:44発の最終の東北新幹線「はやぶさ」号東京行きに乗車します。この列車は東京行き終電に相当し、指定席を予め予約しておきます（乗り遅れ厳禁）。</p>
+                </div>
+                
+                <div class="timeline-item" style="border-left: 5px solid var(--primary);">
+                    <div class="timeline-time">23:04</div>
+                    <h3>東京駅着</h3>
+                    <p>新幹線は約3時間20分で東京駅に到着します。23時過ぎに東京駅に戻り、目黒駅までは山手線などで帰宅します。お疲れさまでした！</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>乳頭温泉郷の滞在情報</h2>
+            <p>乳頭温泉郷では約2～3時間の滞在時間があります。日帰り入浴が可能な温泉宿の中から1軒を選び、名湯を堪能しましょう（時間に余裕があれば2軒はしごも可能です）。</p>
+            
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">鶴の湯温泉</div>
+                        <span class="badge badge-onsen">温泉</span>
+                        <p>江戸時代から続く茅葺き屋根の宿で、乳白色のにごり湯が有名です。日帰り入浴時間は10:00～15:00、料金は大人700円。混浴の露天風呂（女性専用時間帯あり）で秘湯情緒を味わえます。</p>
+                        <p><strong>注意点：</strong>月曜午前中は清掃のため露天風呂利用不可。</p>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">妙乃湯温泉</div>
+                        <span class="badge badge-onsen">温泉</span>
+                        <p>女性に人気の和モダンな宿。金の湯・銀の湯と呼ばれる2種類の源泉を楽しめます。日帰り入浴時間は10:30～14:00（最終受付14:00）、火曜定休、料金は大人1,000円です。</p>
+                        <p>内湯と露天風呂に加え混浴露天も1つあり、湯めぐり気分が味わえます。女性客にも配慮されたおしゃれな雰囲気の温泉宿です。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>入浴後の過ごし方</h3>
+            <p>温泉で汗を流した後は、休憩所でひと息ついたり、併設の食事処で昼食をとりましょう。例えば妙乃湯では昼食営業（11:30～14:00）を行っており、秋田名物の稲庭うどんセットなどが提供されています。</p>
+            <p>稲庭うどんは秋田が誇る細打ちうどんで、のどごしが良く温冷選べます。また、秋田名物のきりたんぽ鍋をランチタイムに提供している宿もあります。きりたんぽ鍋は炭火で焼いた米棒（きりたんぽ）を比内地鶏だしの醤油スープで煮込んだ郷土料理で、秋田を代表する味です。</p>
+            <p>ランチを楽しんだあとは、13時前後には着替えてバス停に向かいましょう。雪深い時期ですので、移動時は防寒具を着用し、宿からバス停までの移動も足元に注意してください。</p>
+        </section>
+        
+        <section class="section">
+            <h2>青森の観光スポットとグルメ情報</h2>
+            
+            <h3>青森市内の観光スポット（夕方～夜）</h3>
+            <p>青森到着後、夕方から夜にかけて市内中心部で短時間でも楽しめるスポットを巡ります。</p>
+            
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">ねぶたの家 ワ・ラッセ</div>
+                        <span class="badge badge-tourism">観光</span>
+                        <p>青森駅前にある青森ねぶた祭のミュージアムです。館内に巨大なねぶた祭の山車が常設展示されており、祭りの迫力と雰囲気を一年中体感できます。所要30～60分ほどで見学可能です。</p>
+                        <p><strong>開館時間：</strong>9:00～18:00（最終入館17:00）<br>
+                        <strong>入館料：</strong>大人600円程度</p>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">青森ベイエリア散策</div>
+                        <span class="badge badge-tourism">観光</span>
+                        <p>ワ・ラッセ見学後、青森駅裏手のベイエリアを散策します。夕暮れ時には青森ベイブリッジや港に停泊する青函連絡船メモリアルシップ「八甲田丸」などが外観から眺められ、港町の風情を感じられます。</p>
+                        <p>ライトアップされたベイブリッジを背景に記念写真を撮ったり、周辺の物産施設に立ち寄るのもおすすめです。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>秋田＆青森のご当地グルメ</h3>
+            
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">きりたんぽ鍋</div>
+                        <span class="badge badge-food">秋田グルメ</span>
+                        <p>秋田を代表する鍋料理で、つぶしたご飯を杉の串に巻き付けて焼いた「きりたんぽ」を比内地鶏の出汁で野菜や舞茸と共に煮込んだものです。香ばしいきりたんぽに旨みたっぷりのスープが染み込み、体が温まります。</p>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">稲庭うどん</div>
+                        <span class="badge badge-food">秋田グルメ</span>
+                        <p>秋田県湯沢市発祥の名物うどんで、日本三大うどんの一つです。コシのある細麺が特徴で、冷たいざるうどんでも温かいかけうどんでも美味しく頂けます。妙乃湯の昼食メニューでも稲庭うどんセットが提供されています。</p>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">ほたての貝焼き味噌</div>
+                        <span class="badge badge-food">青森グルメ</span>
+                        <p>青森県津軽地方に伝わる郷土料理で、大きなホタテの貝殻をお鍋代わりに用います。出汁に味噌を溶いて煮立たせ、具材（ホタテやネギ等）を入れて最後に卵でとじた味噌汁風の一品です。青森市内の居酒屋や郷土料理店で提供されています。</p>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="location-info">
+                        <div class="location-name">りんごスイーツ</div>
+                        <span class="badge badge-food">青森グルメ</span>
+                        <p>青森県は「全国のりんご生産量の約6割」を占める日本一のりんご王国。駅周辺でもリンゴ関連のお土産やスイーツが充実しています。特に青森駅近くの物産館やカフェではアップルパイの食べ比べができるほど種類が豊富です。</p>
+                        <p>青森港の複合施設「A-FACTORY」ではりんごジュースやシードル（発泡酒）工房があり、テイクアウトでアップルシードルを購入できます。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="tips">
+            <h2>旅のポイントと持ち物</h2>
+            
+            <h3>JR東日本たびキュン早割パスの活用</h3>
+            <p>このフリーパスはJR東日本エリアの新幹線・特急を含む列車が1日乗り降り自由で、普通車指定席も2回まで無料で利用できます。長距離移動となる東京〜田沢湖〜青森〜東京間では、事前に指定席を確保して快適に移動しましょう（指定席予約は「えきねっと」で乗車14日前までに可能）。</p>
+            
+            <h3>持ち物・服装</h3>
+            <ul class="tips-list">
+                <li>防寒着（コート、手袋、帽子）- 3月上旬の秋田・青森はまだ真冬並みの寒さです</li>
+                <li>滑りにくい靴 - 特に乳頭温泉郷は雪深い山間部です</li>
+                <li>温泉用タオル（小・大）- 温泉施設でもタオル貸出や販売あり</li>
+                <li>着替え - 温泉後に着替えると快適です</li>
+                <li>モバイルバッテリー - 長時間の移動に備えて</li>
+                <li>水筒・軽食 - 移動時間が長いので携帯食があると便利です</li>
+                <li>乗車券・たびキュンパス・予約席券 - 忘れずに！</li>
+                <li>現金 - 温泉入浴料やバス代、食事代など</li>
+            </ul>
+            
+            <h3>時間管理と調整</h3>
+            <p>非常に距離の長い行程のため、各移動で時間厳守が重要です。路線バスの発車時刻や新幹線の乗換時間には余裕を持って行動し、特に新青森発の最終新幹線は乗り遅れると当日中に東京へ戻れません。</p>
+            <p>万一、予定より早く行程が進んだ場合は、新青森19:44発より一つ前のはやぶさ（例えば18:25発21:23着）に繰り上げて乗車する選択肢もあります。逆に予定が押して乳頭温泉発のバスに遅れそうなときは、無理をせず次の便に乗り、青森での観光時間を短縮して調整しましょう。</p>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>東京発・乳頭温泉＆青森 日帰り旅行しおり</p>
+            <p>2025年3月7日（金）実施</p>
+        </div>
+    </footer>
+</body>
+</html>
